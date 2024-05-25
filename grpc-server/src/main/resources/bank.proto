@@ -1,0 +1,21 @@
+syntax="proto3";
+option java_package = "ma.grpc.stubs";
+//  its' very important to define the proto file for Grpc
+// to implement the service we need to do the compilation protocol buffer
+service BankService {
+    rpc convert(ConvertCurrencyRequest) returns (ConvertCurrencyResponse); // unary model
+    rpc getCurrentCurrencyStream(ConvertCurrencyRequest) returns (stream ConvertCurrencyResponse); // server streaming model
+    rpc performStream(stream ConvertCurrencyRequest) returns (stream ConvertCurrencyResponse); // client streaming model
+    rpc fullCurrencyStream(stream ConvertCurrencyRequest) returns (stream ConvertCurrencyResponse); // bidirectional streaming model
+}
+message ConvertCurrencyRequest {
+    string  currencyFrom = 1;
+    string currencyTo = 2;
+    double amount = 3;
+}
+message ConvertCurrencyResponse {
+  string  currencyFrom = 1;
+  string currencyTo = 2;
+  double amount = 3;
+  double result = 4;
+}
